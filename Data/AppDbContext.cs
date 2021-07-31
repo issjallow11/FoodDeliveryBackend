@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace FoodDeliveryBackend.Data.ViewModels
+namespace FoodDeliveryBackend.Data
 {
     public class AppDbContext : DbContext
     {
@@ -14,6 +14,6 @@ namespace FoodDeliveryBackend.Data.ViewModels
 
         }
 
-        public DbSet<Users> Users { get; set; }
+        public DbSet<User> Users { get; set; }
     }
 }

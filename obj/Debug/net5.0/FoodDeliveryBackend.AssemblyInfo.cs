@@ -11,6 +11,7 @@
 using System;
 using System.Reflection;
 
+[assembly: Microsoft.AspNetCore.Identity.UI.UIFrameworkAttribute("Bootstrap4")]
 [assembly: Microsoft.Extensions.Configuration.UserSecrets.UserSecretsIdAttribute("aspnet-FoodDeliveryBackend-5523F6F7-3266-493D-9288-025C509B94DB")]
 [assembly: System.Reflection.AssemblyCompanyAttribute("FoodDeliveryBackend")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
