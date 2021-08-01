@@ -14,6 +14,16 @@ namespace FoodDeliveryBackend.Data
 
         }
 
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<FoodItem>().HasMany(a => a.Categories).WithOne(t => t.FoodItem);
+        }
+
         public DbSet<User> Users { get; set; }
+
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<FoodItem> FoodItems { get; set; }
     }
 }

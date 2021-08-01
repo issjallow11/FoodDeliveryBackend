@@ -36,6 +36,12 @@ namespace FoodDeliveryBackend.Data.Services
             return GenerateToken(appUser);
         }
 
+        public int GetCurrentUserId(ClaimsPrincipal principal)
+        {
+            var userClaim = principal.Claims.SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
+            return Convert.ToInt32(userClaim.Value);
+        }
+
         private string GenerateToken(User user)
         {
             var claims = new[]
