@@ -14,9 +14,8 @@ namespace FoodDeliveryBackend.Models
 
         [Required]
         public string Name { get; set; }
+        
+        public List<FoodItem> FoodItems { get; set; }
 
-        [ForeignKey("FoodItemId")]
-        public FoodItem FoodItem { get; set; }
-        public int FoodItemId { get; internal set; }
     }
 }

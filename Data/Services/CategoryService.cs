@@ -17,9 +17,9 @@ namespace FoodDeliveryBackend.Data.Services
 
         
 
-        public List<Category> GetCategories(int foodItemId)
+        public List<Category> GetCategories()
         {
-            return _context.Categories.Where(t => t.FoodItemId == foodItemId).ToList();
+            return _context.Categories.OrderBy(c=>c.Name).ToList();
         }
 
         public Category GetCategory(int id)

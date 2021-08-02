@@ -22,16 +22,11 @@ namespace FoodDeliveryBackend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
-                    b.Property<int?>("FoodItemId")
-                        .HasColumnType("INTEGER");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasColumnType("TEXT");
 
                     b.HasKey("Id");
-
-                    b.HasIndex("FoodItemId");
 
                     b.ToTable("Categories");
                 });
@@ -40,6 +35,9 @@ namespace FoodDeliveryBackend.Migrations
                 {
                     b.Property<int>("id")
                         .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<int?>("CategoryId")
                         .HasColumnType("INTEGER");
 
                     b.Property<string>("Image")
@@ -54,6 +52,8 @@ namespace FoodDeliveryBackend.Migrations
                         .HasColumnType("INTEGER");
 
                     b.HasKey("id");
+
+                    b.HasIndex("CategoryId");
 
                     b.ToTable("FoodItems");
                 });
@@ -89,18 +89,18 @@ namespace FoodDeliveryBackend.Migrations
                     b.ToTable("Users");
                 });
 
-            modelBuilder.Entity("FoodDeliveryBackend.Models.Category", b =>
-                {
-                    b.HasOne("FoodDeliveryBackend.Models.FoodItem", "FoodItem")
-                        .WithMany("Categories")
-                        .HasForeignKey("FoodItemId");
-
-                    b.Navigation("FoodItem");
-                });
-
             modelBuilder.Entity("FoodDeliveryBackend.Models.FoodItem", b =>
                 {
-                    b.Navigation("Categories");
+                    b.HasOne("FoodDeliveryBackend.Models.Category", "Category")
+                        .WithMany("FoodItems")
+                        .HasForeignKey("CategoryId");
+
+                    b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("FoodDeliveryBackend.Models.Category", b =>
+                {
+                    b.Navigation("FoodItems");
                 });
 #pragma warning restore 612, 618
         }

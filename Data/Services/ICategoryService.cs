@@ -8,7 +8,7 @@ namespace FoodDeliveryBackend.Data.Services
 {
     public interface ICategoryService
     {
-        List<Category> GetCategories(int FoodItemId);
+        List<Category> GetCategories();
         Category GetCategory(int id);
         void AddCategory(Category category);
         void UpdateCategory(Category category);

@@ -3275,26 +3275,24 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Ismaila Jallow\\.nuget\\packages\\": {}
+    "/home/cayor/.nuget/packages/": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Ismaila Jallow\\source\\repos\\FoodDeliveryBackend\\FoodDeliveryBackend.csproj",
+      "projectUniqueName": "/home/cayor/Desktop/sourcery/project/FoodDeliveryBackend/FoodDeliveryBackend.csproj",
       "projectName": "FoodDeliveryBackend",
-      "projectPath": "C:\\Users\\Ismaila Jallow\\source\\repos\\FoodDeliveryBackend\\FoodDeliveryBackend.csproj",
-      "packagesPath": "C:\\Users\\Ismaila Jallow\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Ismaila Jallow\\source\\repos\\FoodDeliveryBackend\\obj\\",
+      "projectPath": "/home/cayor/Desktop/sourcery/project/FoodDeliveryBackend/FoodDeliveryBackend.csproj",
+      "packagesPath": "/home/cayor/.nuget/packages/",
+      "outputPath": "/home/cayor/Desktop/sourcery/project/FoodDeliveryBackend/obj/",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Ismaila Jallow\\AppData\\Roaming\\NuGet\\NuGet.Config",
-        "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+        "/home/cayor/.nuget/NuGet/NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net5.0"
       ],
       "sources": {
-        "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
@@ -3374,7 +3372,7 @@
             "privateAssets": "all"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\5.0.301\\RuntimeIdentifierGraph.json"
+        "runtimeIdentifierGraphPath": "/snap/dotnet-sdk/current/sdk/5.0.302/RuntimeIdentifierGraph.json"
       }
     }
   }
