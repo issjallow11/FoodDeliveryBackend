@@ -18,7 +18,7 @@ namespace FoodDeliveryBackend.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Category>().HasMany(a => a.FoodItems).WithOne(t => t.Category);
+            modelBuilder.Entity<FoodItem>().HasOne(a=>a.Category).WithMany(t=>t.FoodItems);
         }
 
         public DbSet<User> Users { get; set; }
