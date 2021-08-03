@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Http;
 
 namespace FoodDeliveryBackend.Models
 {
@@ -16,8 +17,9 @@ namespace FoodDeliveryBackend.Models
         public string Image { get; set; }
 
         [Required]
-        public string Name { get; set; }
-
+        public string Name { get; set; }    
+        [NotMapped]
+        public IFormFile ImageFile { get; set; }
 
         [Required]
         public int price { get; set; }
