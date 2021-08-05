@@ -9,6 +9,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
+using Microsoft.AspNetCore.Mvc;
 
 namespace FoodDeliveryBackend.Data.Services
 {
@@ -25,7 +26,7 @@ namespace FoodDeliveryBackend.Data.Services
             _context = context;
         }
 
-        public string Authenticate(AuthUser user)
+        /*public string Authenticate([FromForm]AuthUser user)
         {
             User appUser = _context.Users.SingleOrDefault(u => u.Email == user.Email && u.Password == user.Password);
 
@@ -34,12 +35,28 @@ namespace FoodDeliveryBackend.Data.Services
                 return null;
             }
             return GenerateToken(appUser);
+        }*/
+
+
+        public User GetById(int id)
+        {
+            return _context.Users.FirstOrDefault(u => u.Id == id);
         }
 
         public int GetCurrentUserId(ClaimsPrincipal principal)
         {
             var userClaim = principal.Claims.SingleOrDefault(c => c.Type == ClaimTypes.NameIdentifier);
             return Convert.ToInt32(userClaim.Value);
+        }
+
+        public User GetByEmail(string email)
+        {
+            return _context.Users.FirstOrDefault(u => u.Email == email);
+        }
+
+        public List<User> GetUsers()
+        {
+            return _context.Users.OrderBy(u=>u.Id).ToList();
         }
 
         private string GenerateToken(User user)
@@ -59,10 +76,11 @@ namespace FoodDeliveryBackend.Data.Services
             return new JwtSecurityTokenHandler().WriteToken(tokenDescriptor);
         }
 
-        public void Register(User user)
+        public User Register(User user)
         {
-            _context.Add(user);
-            _context.SaveChanges();
+            _context.Users.Add(user);
+            user.Id = _context.SaveChanges();
+            return user;
         }
 
 

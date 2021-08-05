@@ -3,6 +3,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using Microsoft.EntityFrameworkCore;
 
 namespace FoodDeliveryBackend.Data.Services
 {
@@ -37,7 +38,10 @@ namespace FoodDeliveryBackend.Data.Services
 
         public void UpdateCategory(Category category)
         {
-            throw new NotImplementedException();
+            //throw new NotImplementedException();
+            _context.Entry(category).State = EntityState.Modified; 
+            _context.SaveChanges();
+            
         }
 
         

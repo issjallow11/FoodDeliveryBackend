@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
+using System.Text.Json.Serialization;
 using System.Threading.Tasks;
 
 namespace FoodDeliveryBackend.Models
@@ -23,7 +24,7 @@ namespace FoodDeliveryBackend.Models
 
         [Required]
         [DataType(DataType.Password)]
-        public string Password { get; set; }
+        [JsonIgnore]public string Password { get; set; }
 
         [Required]
         public string Role { get; set; }

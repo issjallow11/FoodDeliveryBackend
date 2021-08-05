@@ -8,6 +8,7 @@ using FoodDeliveryBackend.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace FoodDeliveryBackend.Controllers
 {
@@ -26,9 +27,17 @@ namespace FoodDeliveryBackend.Controllers
         }
         // GET: api/FoodItem
         [HttpGet]
-        public IEnumerable<string> Get()
+        public async Task<ActionResult<IEnumerable<FoodItem>>> GetFoodItems()
         {
-            return new string[] { "value1", "value2" };
+            return await _context.FoodItems
+                .Select(x => new FoodItem() { 
+                    id = x.id,
+                    Name = x.Name,
+                    price = x.price,
+                    Image = x.Image,
+                    ImageSrc = String.Format("{0}://{1}{2}/Images/{3}",Request.Scheme,Request.Host,Request.PathBase,x.Image)
+                })
+                .ToListAsync();
         }
 
         // GET: api/FoodItem/5

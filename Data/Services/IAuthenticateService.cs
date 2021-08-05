@@ -10,8 +10,12 @@ namespace FoodDeliveryBackend.Data.Services
 {
     public interface IAuthenticateService
     {
-        string Authenticate(AuthUser user);
+        //string Authenticate(AuthUser user);
+        User GetByEmail(string email);
+        List<User> GetUsers();
+
+        User GetById(int id);
         int GetCurrentUserId(ClaimsPrincipal principal);
-        void Register(User user);
+        User Register(User user);
     }
 }

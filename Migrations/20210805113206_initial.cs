@@ -62,6 +62,12 @@ namespace FoodDeliveryBackend.Migrations
                 name: "IX_FoodItems_CategoryId",
                 table: "FoodItems",
                 column: "CategoryId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Users_Email",
+                table: "Users",
+                column: "Email",
+                unique: true);
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)

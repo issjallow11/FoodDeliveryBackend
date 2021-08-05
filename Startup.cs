@@ -18,9 +18,13 @@ using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi.Models;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FoodDeliveryBackend.Helpers;
+using Microsoft.AspNetCore.Authentication.Certificate;
+using Microsoft.Extensions.FileProviders;
 
 namespace FoodDeliveryBackend
 {
@@ -32,12 +36,18 @@ namespace FoodDeliveryBackend
         }
 
         public IConfiguration Configuration { get; }
+        
+        readonly string MyAllowSpecificOrigins = "_myAllowSpecificOrigins";
+
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
-        {
-
-
+        { 
+            //services.AddCors();
+            services.AddCors();
+            services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
+           
+           
             services.AddDbContext<AppDbContext>(options =>
                    options.UseSqlite(Configuration.GetConnectionString("AppDbContext")));
 
@@ -68,7 +78,7 @@ namespace FoodDeliveryBackend
             //services.AddDefaultIdentity<IdentityUser>(options => options.SignIn.RequireConfirmedAccount = true)
             //  .AddEntityFrameworkStores<AppDbContext>();
 
-            services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
+           /* services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme).AddJwtBearer(options =>
             {
                 options.TokenValidationParameters = new TokenValidationParameters
                 {
@@ -80,7 +90,8 @@ namespace FoodDeliveryBackend
                     ValidAudience = Configuration["JwtConfig:Audience"],
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["JwtConfig:Key"]))
                 };
-            });
+            });*/
+           services.AddScoped<JwtService>();
 
             services.AddControllers();
             services.AddSwaggerGen(c =>
@@ -90,21 +101,35 @@ namespace FoodDeliveryBackend
 
             services.AddTransient<IAuthenticateService, AuthService>();
             services.AddTransient<ICategoryService, CategoryService>();
+            
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
+            app.UseCors(options => options.WithOrigins("http://localhost:3000")
+                .AllowAnyMethod()
+                .AllowAnyHeader()
+                .AllowCredentials());
+
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
+                app.UseStaticFiles(new StaticFileOptions
+                {
+                    FileProvider = new PhysicalFileProvider(Path.Combine(env.ContentRootPath, "Images")),
+                    RequestPath = "/Images"
+                });
                 app.UseSwagger();
                 app.UseSwaggerUI(c => c.SwaggerEndpoint("/swagger/v1/swagger.json", "FoodDeliveryBackend v1"));
             }
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
 
             app.UseRouting();
+            
+            app.UseCors(MyAllowSpecificOrigins);
+
 
             app.UseAuthentication();
             app.UseAuthorization();
@@ -112,6 +137,7 @@ namespace FoodDeliveryBackend
             app.UseEndpoints(endpoints =>
             {
                 endpoints.MapControllers();
+
             });
         }
     }

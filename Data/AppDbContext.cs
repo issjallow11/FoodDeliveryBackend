@@ -21,6 +21,7 @@ namespace FoodDeliveryBackend.Data
             modelBuilder.Entity<Category>()
                 .HasMany(a=>a.FoodItems).
                 WithOne(t=>t.Category);
+            modelBuilder.Entity<User>(entity => { entity.HasIndex(e => e.Email).IsUnique(); });
         }
 
         public DbSet<User> Users { get; set; }
