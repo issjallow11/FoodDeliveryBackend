@@ -18,10 +18,17 @@ namespace FoodDeliveryBackend.Data
         {
             base.OnModelCreating(modelBuilder);
 
-            modelBuilder.Entity<Category>()
+           /* modelBuilder.Entity<Category>()
                 .HasMany(a=>a.FoodItems).
-                WithOne(t=>t.Category);
+                WithOne(t=>t.Category).OnDelete(DeleteBehavior.Cascade);*/
             modelBuilder.Entity<User>(entity => { entity.HasIndex(e => e.Email).IsUnique(); });
+            modelBuilder.Entity<User>().HasData(new User
+            {
+                Id = 1, FirstName = "Ismaila", LastName = "Jallow", Email = "iss11@gmail.com", Password = BCrypt.Net.BCrypt.HashPassword("password"),
+                Role = "admin"
+            });
+
+
         }
 
         public DbSet<User> Users { get; set; }

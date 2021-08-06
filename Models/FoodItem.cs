@@ -13,10 +13,10 @@ namespace FoodDeliveryBackend.Models
         [Key]
         public int id { get; set; }
         
-        [Required]
+        
         public string Image { get; set; }
 
-        [Required]
+        
         public string Name { get; set; }    
         [NotMapped]
         public IFormFile ImageFile { get; set; }
@@ -27,8 +27,12 @@ namespace FoodDeliveryBackend.Models
         [Required]
         public int price { get; set; }
         
-        [ForeignKey("CategoryId")]
-        public Category Category { get; set; }
+        public string description { get; set; }
+         
+        public string category { get; set; }
+        
+        //[ForeignKey("CategoryId")]
+       // public Category Category { get; set; }
 
        
 

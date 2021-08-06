@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
 using FoodDeliveryBackend.Data;
+using FoodDeliveryBackend.Data.ViewModels;
 using FoodDeliveryBackend.Models;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
@@ -51,11 +52,20 @@ namespace FoodDeliveryBackend.Controllers
         [HttpPost]
         public async Task<ActionResult<FoodItem>> PostFoodItem([FromForm]FoodItem foodItem)
         {
-            foodItem.Image = await SaveImage(foodItem.ImageFile);
-            _context.FoodItems.Add(foodItem);
-            await _context.SaveChangesAsync();
 
-            return StatusCode(201);
+            try
+            {
+                foodItem.Image = await SaveImage(foodItem.ImageFile);
+                _context.FoodItems.Add(foodItem);
+                await _context.SaveChangesAsync();
+
+                return StatusCode(201);
+            }
+            catch (Exception e)
+            {
+                return BadRequest(e.Message);
+            }
+          
         }
 
         // PUT: api/FoodItem/5

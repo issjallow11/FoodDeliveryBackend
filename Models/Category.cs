@@ -15,7 +15,7 @@ namespace FoodDeliveryBackend.Models
         [Required]
         public string Name { get; set; }
         
-        public List<FoodItem> FoodItems { get; set; }
+        //public List<FoodItem> FoodItems { get; set; }
 
     }
 }
