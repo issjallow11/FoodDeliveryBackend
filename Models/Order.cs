@@ -28,8 +28,10 @@ namespace FoodDeliveryBackend.Models
         
         [Required]
         public string FoodItemName { get; set; }
-        //[ForeignKey("FoodItemId")]
-        //public FoodItem FoodItem { get; set; }
+
+        [Required]
+        public string Status { get; set; }
+        
         
         
     }
