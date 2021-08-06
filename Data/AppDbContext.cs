@@ -1,9 +1,5 @@
 ﻿using FoodDeliveryBackend.Models;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 
 namespace FoodDeliveryBackend.Data
 {
@@ -21,6 +17,8 @@ namespace FoodDeliveryBackend.Data
            /* modelBuilder.Entity<Category>()
                 .HasMany(a=>a.FoodItems).
                 WithOne(t=>t.Category).OnDelete(DeleteBehavior.Cascade);*/
+               
+
             modelBuilder.Entity<User>(entity => { entity.HasIndex(e => e.Email).IsUnique(); });
             modelBuilder.Entity<User>().HasData(new User
             {
@@ -33,7 +31,9 @@ namespace FoodDeliveryBackend.Data
 
         public DbSet<User> Users { get; set; }
 
-        public DbSet<Category> Categories { get; set; }
+        public DbSet<Category> Categories { get; set; } 
         public DbSet<FoodItem> FoodItems { get; set; }
+        public DbSet<Order> Orders { get; set; }
+
     }
 }

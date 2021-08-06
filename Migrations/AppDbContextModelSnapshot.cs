@@ -36,16 +36,18 @@ namespace FoodDeliveryBackend.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("INTEGER");
 
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
                     b.Property<string>("Image")
                         .HasColumnType("TEXT");
 
                     b.Property<string>("Name")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("category")
-                        .HasColumnType("TEXT");
-
-                    b.Property<string>("description")
                         .HasColumnType("TEXT");
 
                     b.Property<int>("price")
@@ -54,6 +56,37 @@ namespace FoodDeliveryBackend.Migrations
                     b.HasKey("id");
 
                     b.ToTable("FoodItems");
+                });
+
+            modelBuilder.Entity("FoodDeliveryBackend.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FoodItemName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Orders");
                 });
 
             modelBuilder.Entity("FoodDeliveryBackend.Models.User", b =>
@@ -96,7 +129,7 @@ namespace FoodDeliveryBackend.Migrations
                             Email = "iss11@gmail.com",
                             FirstName = "Ismaila",
                             LastName = "Jallow",
-                            Password = "$2a$11$bkoKTrFKQMEyzhdUUsp.wOrijYFQ5pXcUkL4k6l212WnwjA.sXFiS",
+                            Password = "$2a$11$y1n4kKsutr1QdS5LG5hVqO4LkYKYZk0fnxHcm7E8FUPEuvrzHlJzO",
                             Role = "admin"
                         });
                 });

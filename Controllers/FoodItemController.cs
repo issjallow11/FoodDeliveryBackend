@@ -36,6 +36,7 @@ namespace FoodDeliveryBackend.Controllers
                     Name = x.Name,
                     price = x.price,
                     Image = x.Image,
+                    Description = x.Description,
                     ImageSrc = String.Format("{0}://{1}{2}/Images/{3}",Request.Scheme,Request.Host,Request.PathBase,x.Image)
                 })
                 .ToListAsync();

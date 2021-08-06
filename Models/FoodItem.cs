@@ -27,9 +27,11 @@ namespace FoodDeliveryBackend.Models
         [Required]
         public int price { get; set; }
         
-        public string description { get; set; }
+        [Required]
+        public string Description { get; set; }
          
-        public string category { get; set; }
+        [Required]
+        public string Category { get; set; }
         
         //[ForeignKey("CategoryId")]
        // public Category Category { get; set; }

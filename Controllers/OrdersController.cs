@@ -1,48 +1,44 @@
 ﻿using FoodDeliveryBackend.Data.Services;
-using Microsoft.AspNetCore.Http;
+using FoodDeliveryBackend.Models;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using FoodDeliveryBackend.Models;
-using Microsoft.AspNetCore.Authorization;
 
 namespace FoodDeliveryBackend.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    
-    public class CategoriesController : ControllerBase
+    public class OrdersController : ControllerBase
     {
-        private readonly ICategoryService _service;
-        //private readonly IAuthenticateService _authService;
+        private readonly IOrderService _service;
 
-        public CategoriesController(ICategoryService service)
+        public OrdersController(IOrderService service)
         {
             _service = service;
         }
 
         [HttpGet]
-        
+
         public IActionResult Index()
         {
             try
             {
-                return Ok(_service.GetCategories());
+                return Ok(_service.GetOrders());
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
         }
-        
+
         [HttpGet("{id}")]
         public IActionResult GetCategory([FromRoute] int id)
         {
             try
             {
-                return Ok(_service.GetCategory(id));
+                return Ok(_service.GetOrder(id));
             }
             catch (Exception e)
             {
@@ -51,46 +47,45 @@ namespace FoodDeliveryBackend.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddCategory([FromBody] Category category)
+        public IActionResult AddOrder([FromBody] Order order)
         {
             try
             {
-                _service.AddCategory(category);
-                return Ok(new {Success = "Successfully added new record"});
+                _service.AddOrder(order);
+                return Ok(new { Success = "Successfully added new record" });
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
         }
-        
+
         [HttpPut]
-        public IActionResult UpdateCategory([FromBody] Category category)
+        public IActionResult UpdateCategory([FromBody] Order order)
         {
             try
             {
-                _service.UpdateCategory(category);
-                return Ok(new {Success = "Successfully updated record"});
+                _service.UpdateOrder(order);
+                return Ok(new { Success = "Successfully updated record" });
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
         }
-        
+
         [HttpDelete]
         public IActionResult DeleteCategory([FromRoute] int id)
         {
             try
             {
-                _service.DeleteCategory(id);
-                return Ok(new {Success = "Successfully deleted record"});
+                _service.DeleteOrder(id);
+                return Ok(new { Success = "Successfully deleted record" });
             }
             catch (Exception e)
             {
                 return BadRequest(e.Message);
             }
         }
-        
     }
 }

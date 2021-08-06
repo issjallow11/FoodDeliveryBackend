@@ -28,12 +28,29 @@ namespace FoodDeliveryBackend.Migrations
                     Image = table.Column<string>(type: "TEXT", nullable: true),
                     Name = table.Column<string>(type: "TEXT", nullable: true),
                     price = table.Column<int>(type: "INTEGER", nullable: false),
-                    description = table.Column<string>(type: "TEXT", nullable: true),
-                    category = table.Column<string>(type: "TEXT", nullable: true)
+                    Description = table.Column<string>(type: "TEXT", nullable: false),
+                    Category = table.Column<string>(type: "TEXT", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_FoodItems", x => x.id);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Orders",
+                columns: table => new
+                {
+                    Id = table.Column<int>(type: "INTEGER", nullable: false)
+                        .Annotation("Sqlite:Autoincrement", true),
+                    FirstName = table.Column<string>(type: "TEXT", nullable: false),
+                    LastName = table.Column<string>(type: "TEXT", nullable: false),
+                    Address = table.Column<string>(type: "TEXT", nullable: false),
+                    Phone = table.Column<string>(type: "TEXT", nullable: false),
+                    FoodItemName = table.Column<string>(type: "TEXT", nullable: false)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Orders", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -56,7 +73,7 @@ namespace FoodDeliveryBackend.Migrations
             migrationBuilder.InsertData(
                 table: "Users",
                 columns: new[] { "Id", "Email", "FirstName", "LastName", "Password", "Role" },
-                values: new object[] { 1, "iss11@gmail.com", "Ismaila", "Jallow", "$2a$11$bkoKTrFKQMEyzhdUUsp.wOrijYFQ5pXcUkL4k6l212WnwjA.sXFiS", "admin" });
+                values: new object[] { 1, "iss11@gmail.com", "Ismaila", "Jallow", "$2a$11$y1n4kKsutr1QdS5LG5hVqO4LkYKYZk0fnxHcm7E8FUPEuvrzHlJzO", "admin" });
 
             migrationBuilder.CreateIndex(
                 name: "IX_Users_Email",
@@ -72,6 +89,9 @@ namespace FoodDeliveryBackend.Migrations
 
             migrationBuilder.DropTable(
                 name: "FoodItems");
+
+            migrationBuilder.DropTable(
+                name: "Orders");
 
             migrationBuilder.DropTable(
                 name: "Users");
