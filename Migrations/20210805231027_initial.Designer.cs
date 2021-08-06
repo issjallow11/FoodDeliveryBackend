@@ -9,7 +9,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FoodDeliveryBackend.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20210805113206_initial")]
+    [Migration("20210805231027_initial")]
     partial class initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -60,6 +60,38 @@ namespace FoodDeliveryBackend.Migrations
                     b.ToTable("FoodItems");
                 });
 
+            modelBuilder.Entity("FoodDeliveryBackend.Models.Order", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("Address")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("FirstName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<int?>("FoodItemId")
+                        .HasColumnType("INTEGER");
+
+                    b.Property<string>("LastName")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.Property<string>("Phone")
+                        .IsRequired()
+                        .HasColumnType("TEXT");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("FoodItemId");
+
+                    b.ToTable("Orders");
+                });
+
             modelBuilder.Entity("FoodDeliveryBackend.Models.User", b =>
                 {
                     b.Property<int>("Id")
@@ -101,6 +133,15 @@ namespace FoodDeliveryBackend.Migrations
                         .HasForeignKey("CategoryId");
 
                     b.Navigation("Category");
+                });
+
+            modelBuilder.Entity("FoodDeliveryBackend.Models.Order", b =>
+                {
+                    b.HasOne("FoodDeliveryBackend.Models.Category", "FoodItem")
+                        .WithMany()
+                        .HasForeignKey("FoodItemId");
+
+                    b.Navigation("FoodItem");
                 });
 
             modelBuilder.Entity("FoodDeliveryBackend.Models.Category", b =>
